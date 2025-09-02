@@ -1,54 +1,106 @@
-## Task:
+# Posts & Comments API
 
-## ✅ Task Status: Completed
+A robust Django REST Framework API designed to deliver a list of posts with their associated comments, optimized for modern frontend applications with features like infinite scrolling.
 
-### Implement an API endpoint for the scenario below:
-
-- Imagine that a frontend design has been drafted to present data that we already have in our DB: `Posts` and `Comments`. 
-
-  * The design is an infinite scrolling list of `Posts`.
-
-- The list of `Posts` should be ordered by timestamp, latest first. 
-
-- Some `Posts` will have `Comments`. 
-
-- For each `Post` in this list, we want to show up to 3 `Comments` for that `Post` (`Comments` also sorted latest first).
-
-  * For each `Post`: we will need to display a `Post`'s text, timestamp, `Comment` count, and author's username.
-
-  * For `Comments`: we will need to display a `Comment`'s text, timestamp, and author's username.
-
-- Include basic documentation on how to use your new endpoint.
-
-### Follow-up Q: 
-- Instead of sorting comments by timestamp, how would you fetch 3 random comments associated to a given post?
-  * You can leave your answer anywhere in the project codebase that you deem appropriate.
+![Status: Completed](https://img.shields.io/badge/status-completed-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![Django](https://img.shields.io/badge/Django-4.2+-092E20.svg)
+![Django REST Framework](https://img.shields.io/badge/DRF-3.14+-A30000.svg)
 
 ---
 
-## To get started:
+## ✨ Key Features
 
-1. Set up a virtualenv for this project (The author used Python 3.10.14)
+-   **Paginated Posts:** Efficiently load posts for infinite scroll interfaces.
+-   **Nested Comments:** Each post includes a preview of its latest comments.
+-   **Comment Count:** Quickly see the engagement on each post with a total comment count.
+-   **RESTful Design:** Built with the powerful Django REST Framework for a clean, browsable API.
+-   **Admin Panel:** Comes with a built-in Django admin panel for easy data management.
 
-- Example: `pyenv local myvirtualenv` (or however you set up Python virtualenvs)
+## 🚀 Getting Started
 
-2. Install dependencies: `pip install -r requirements.txt`
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-3. Migrate database `python manage.py migrate`
+### Prerequisites
 
-4. Now head to apps/demo/views.py and complete the assignment!
+Make sure you have the following installed on your system:
+-   Python 3.8+
+-   `pip` (Python package installer)
+-   `venv` (recommended for virtual environments)
 
-- Run tests via `python manage.py test apps` or
-- check server after running via `python manage.py runserver`
+### ⚙️ Installation & Setup
 
-python -m venv venv 
-venv\Scripts\activate
-pip install -r requirements.txt         
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd <repository-folder>
+    ```
 
-pip install Django>=4.2                                     
->> pip install djangorestframework>=3.14
+2.  **Create and activate a virtual environment:**
+    ```bash
+    # Create the virtual environment
+    python -m venv venv
 
-python manage.py runserver   
+    # Activate it
+    # On Windows
+    venv\Scripts\activate
 
-http://127.0.0.1:8000/admin/
-http://127.0.0.1:8000/
+    # On macOS/Linux
+    source venv/bin/activate
+    ```
+
+3.  **Install the required dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *Note: The `requirements.txt` file should contain dependencies like `Django` and `djangorestframework`.*
+
+4.  **Apply database migrations:**
+    ```bash
+    python manage.py migrate
+    ```
+
+5.  **Create a superuser to access the Admin Panel:**
+    ```bash
+    python manage.py createsuperuser
+    ```
+    (Follow the prompts to create your admin username and password)
+
+## 🏃‍♂️ Running the Application
+
+1.  **Start the development server:**
+    ```bash
+    python manage.py runserver
+    ```
+    The application will be available at `http://127.0.0.1:8000/`.
+
+2.  **Run tests to ensure everything is working correctly:**
+    ```bash
+    python manage.py test apps
+    ```
+
+## 📡 API Endpoints
+
+Once the server is running, you can access the following endpoints:
+
+| URL                             | Description                                 |
+| ------------------------------- | ------------------------------------------- |
+| `http://127.0.0.1:8000/`        | The Django REST Framework API root.         |
+| `http://127.0.0.1:8000/admin/`  | The Django Admin Panel for managing data.   |
+| `http://127.0.0.1:8000/api/posts/` | **The main endpoint for fetching posts.** |
+
+### Endpoint: `GET /api/posts/`
+
+Returns a paginated list of posts, ordered by the most recent timestamp.
+
+#### Query Parameters
+
+| Parameter   | Type    | Description                                   | Default |
+|-------------|---------|-----------------------------------------------|---------|
+| `page`      | integer | The page number to retrieve.                  | 1       |
+| `page_size` | integer | The number of posts to return per page.       | 10      |
+
+#### Example Request
+
+```http
+GET [http://127.0.0.1:8000/api/posts/?page=1&page_size=5](http://127.0.0.1:8000/api/posts/?page=1&page_size=5)
