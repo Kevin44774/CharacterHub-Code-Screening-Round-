@@ -40,3 +40,15 @@
 
 - Run tests via `python manage.py test apps` or
 - check server after running via `python manage.py runserver`
+
+python -m venv venv 
+venv\Scripts\activate
+pip install -r requirements.txt         
+
+pip install Django>=4.2                                     
+>> pip install djangorestframework>=3.14
+
+python manage.py runserver   
+
+http://127.0.0.1:8000/admin/
+http://127.0.0.1:8000/
